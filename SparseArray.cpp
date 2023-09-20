@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -25,8 +29,6 @@ vector<int> matchingStrings(vector<string> strings, vector<string> queries) {
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
     string strings_count_temp;
     getline(cin, strings_count_temp);
 
@@ -58,16 +60,14 @@ int main()
     vector<int> res = matchingStrings(strings, queries);
 
     for (size_t i = 0; i < res.size(); i++) {
-        fout << res[i];
+        cout << res[i];
 
         if (i != res.size() - 1) {
-            fout << "\n";
+            cout << "\n";
         }
     }
 
-    fout << "\n";
-
-    fout.close();
+    cout << "\n";
 
     return 0;
 }
@@ -77,7 +77,7 @@ string ltrim(const string &str) {
 
     s.erase(
         s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+        find_if(s.begin(), s.end(), [](unsigned char c) { return !ispunct(c); })
     );
 
     return s;
@@ -87,7 +87,7 @@ string rtrim(const string &str) {
     string s(str);
 
     s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        find_if(s.rbegin(), s.rend(), [](unsigned char c) { return !ispunct(c); }).base(),
         s.end()
     );
 
